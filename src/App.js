@@ -1,9 +1,18 @@
 import React from 'react'
+import Header from './components/Header'
 
 function App() {
   return (
     <div className="app">
-      <h1>Hello LinkedIn clone app!!</h1>
+      <Header />
+
+      {/* Content */}
+      
+        {/* Sidebar */}
+        {/* feed */}
+        {/* widgets */}
+      
+      {/* /Content */}
     </div>
   );
 }
