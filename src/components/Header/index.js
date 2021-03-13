@@ -7,7 +7,7 @@ import s from './style/Header.module.css'
 
 function Header() {
 
-    const [menuItems, setMenuItems] = useState([
+    const [menuItems] = useState([
         {id:1, title: 'Home', icon: <AiFillHome className={s.menu__item__icon} />},
         {id:2, title: 'Network', icon: <BsFillPeopleFill className={s.menu__item__icon} />},
         {id:3, title: 'Vacancies', icon: <BsFillBriefcaseFill className={s.menu__item__icon} />},
@@ -19,7 +19,7 @@ function Header() {
         <div className={s.header}>
             <div className={s.header__wrapper}>
                 <div className={s.header__left}>
-                    <img className={s.header__left__img} src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/LinkedIn_logo_initials.png/768px-LinkedIn_logo_initials.png" />
+                    <img className={s.header__left__img} src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/LinkedIn_logo_initials.png/768px-LinkedIn_logo_initials.png" alt="logo" />
                     <div className={s.header__left__search}>
                         <AiOutlineSearch className={s.search__icon} />
                         <input className={s.search__input} type="text" placeholder="Search" />
