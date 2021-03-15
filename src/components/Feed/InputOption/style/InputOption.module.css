@@ -1,0 +1,19 @@
+.feed__input__option {
+    display: flex;
+    align-items: center;
+    padding: 9px 17px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all .3s ease;
+}
+
+.feed__input__option:hover {
+    background-color: rgb(245, 245, 245);
+}
+
+.feed__input__option__text {
+    font-size: 14px;
+    font-weight: 600;
+    color: #999999;
+    margin-left: 5px;
+}

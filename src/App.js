@@ -1,39 +1,18 @@
 import React from 'react'
-import Header from './components/Header'
-import Sidebar from './components/Sidebar'
+import {BrowserRouter} from 'react-router-dom'
+import { useRoutes } from './routes';
 
 function App() {
 
-  const styles = {
-    content: {
-      backgroundColor: '#f3f2ef',
-      padding: '0 24px'
-    },
-    contentWrapper: {
-      display: 'flex',
-      justifyContent: 'spase-between',
-      maxWidth: '1128px',
-      margin: '0 auto',
-      paddingTop: '45px'
-    }
-  }
+  const router = useRoutes()
 
   return (
-    <div className="app">
-      <Header />
-
-      <div className="content" style={styles.content}>
-        <div className="content__wrapper" style={styles.contentWrapper}>
-          {/* Sidebar */}
-          <Sidebar />
-          {/* feed */}
-          <div></div>
-          {/* widgets */}
-          <div></div>
-        </div>
+    <BrowserRouter>
+      <div className="app">
+        { router }
       </div>
-    </div>
-  );
+    </BrowserRouter>
+  )
 }
 
 export default App;

@@ -1,6 +1,6 @@
 .header {
     background-color: #ffffff;
-    padding: 7px 24px;
+    padding: 0 24px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.08);
 }
 
@@ -46,8 +46,6 @@
     width: 100%;
 }
 
-/* .header__right {} */
-
 .menu__list {
     display: flex;
     list-style: none;
@@ -60,11 +58,18 @@
     justify-content: center;
     width: 77px;
     color: #0009;
+    padding: 7px 0;
+    text-decoration: none;
     cursor: pointer;
 }
 
 .menu__item:hover {
     color: #000;
+}
+
+.menu__item__active {
+    color: #000;
+    border-bottom: 2px solid #000;
 }
 
 .menu__item__icon {
