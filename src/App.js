@@ -1,6 +1,6 @@
 import React from 'react'
-import {BrowserRouter} from 'react-router-dom'
-import { useRoutes } from './routes';
+import { BrowserRouter } from 'react-router-dom'
+import { useRoutes } from './routes'
 
 function App() {
 
@@ -15,4 +15,4 @@ function App() {
   )
 }
 
-export default App;
+export default App
