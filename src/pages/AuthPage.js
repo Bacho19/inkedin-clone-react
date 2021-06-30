@@ -1,16 +1,15 @@
 import React from 'react'
-import Header from "../components/Header";
+import AuthTop from "../components/AuthTop";
+import AuthForm from "../components/AuthForm";
 
 function AuthPage() {
     return(
-        <>
-            <Header />
-            <div className="content">
-                <div className="content__wrapper">
-                    <div>asdasdsdad</div>
-                </div>
+        <div style={{backgroundColor: "#F3F2EF", height: "100vh"}}>
+            <div>
+                <AuthTop />
+                <AuthForm />
             </div>
-        </>
+        </div>
     )
 }
 

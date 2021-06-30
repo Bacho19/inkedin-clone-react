@@ -1,18 +1,21 @@
 import React from 'react'
-import { BrowserRouter } from 'react-router-dom'
-import { useRoutes } from './routes'
+import {BrowserRouter} from 'react-router-dom'
+import {useRoutes} from './routes'
+import {useLogin} from "./hooks/useLogin";
 
 function App() {
 
-  const router = useRoutes()
+    const {token} = useLogin()
 
-  return (
-    <BrowserRouter>
-      <div className="app">
-        { router }
-      </div>
-    </BrowserRouter>
-  )
+    const router = useRoutes(!!token)
+
+    return (
+        <BrowserRouter>
+            <div className="app">
+                {router}
+            </div>
+        </BrowserRouter>
+    )
 }
 
 export default App
