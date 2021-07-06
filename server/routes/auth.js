@@ -55,4 +55,21 @@ route.post('/login', async (req, res) => {
     }
 })
 
+route.get('/get-user/:token', async (req, res) => {
+    try {
+        const {token} = req.params
+
+        const id = jwt.decode(token).userId
+        const user = await User.findById(id)
+
+        if (!user) {
+            return res.status(404).json('User not found')
+        }
+
+        res.json({name: user.name})
+    } catch (e) {
+        res.status(500).json({message: 'Something went wrong, please try again'})
+    }
+})
+
 module.exports = route

@@ -46,6 +46,13 @@
     width: 100%;
 }
 
+.header__right {}
+
+.menu {
+    display: flex;
+    align-items: center;
+}
+
 .menu__list {
     display: flex;
     list-style: none;
@@ -79,4 +86,24 @@
 .menu__item__text {
     text-align: center;
     font-size: 12px;
+}
+
+.menu__logout {
+    margin-left: 50px;
+}
+
+.menu__logout button {
+    display: block;
+    width: 70px;
+    height: 27px;
+    border: 1px solid #0A66C2;
+    color: #0A66C2;
+    background-color: #ffffff;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.menu__logout button:hover {
+    background-color: #eef5ff;
 }

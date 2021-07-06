@@ -1,12 +1,12 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import {useHistory} from 'react-router-dom'
 import { AiOutlineSearch, AiFillHome, AiFillMessage } from 'react-icons/ai'
 import { BsFillPeopleFill, BsFillBriefcaseFill } from 'react-icons/bs'
 import { MdNotifications } from 'react-icons/md'
 import { NavLink } from 'react-router-dom'
+import {AuthContext} from "../../context/authContext";
 
 import s from './style/Header.module.css'
-import {useLogin} from "../../hooks/useLogin";
 
 function Header() {
 
@@ -20,13 +20,13 @@ function Header() {
 
     const history = useHistory()
 
-    const {logout} = useLogin()
+    const {logout} = useContext(AuthContext)
 
     const logoutHandler = (e) => {
         e.preventDefault()
-        history.push('/auth')
-
         logout()
+
+        history.push('/auth')
     }
 
     return (

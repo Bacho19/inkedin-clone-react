@@ -1,4 +1,4 @@
-import {CREATE_POST} from "../types";
+import {ADD_POST, FETCH_POSTS} from "../types";
 
 const initialState = {
     news: [
@@ -10,13 +10,15 @@ const initialState = {
         { id: 6, title: 'Front is back)', description: 'News apple - 5517 readers' },
         { id: 7, title: 'Back is front)', description: 'Samsung news - 7529 readers' }
     ],
-    posts: []
+    sharedPosts: []
 }
 
 export const postsReducer = (state = initialState, action) => {
     switch (action.type) {
-        case CREATE_POST:
-            return {...state, posts: [...state.posts, action.payload]}
+        case FETCH_POSTS:
+            return {...state, sharedPosts: action.payload}
+        case ADD_POST:
+            return {...state, sharedPosts: [...state.sharedPosts, action.payload]}
         default:
             return state
     }

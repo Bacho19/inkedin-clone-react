@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import s from './style/Sidebar.module.css'
 
-function Sidebar() {
+function Sidebar({currentUser}) {
 
     const [resents] = useState([
         {id: 1, title: 'javascript'},
@@ -18,8 +18,7 @@ function Sidebar() {
             <div className={s.sidebar__top}>
                 <img className={s.sidebar__top__cover} src="https://i.pinimg.com/originals/e4/02/59/e4025992f83181ef484b3244aaf21252.jpg" alt="cover" />
                 <img className={s.sidebar__top__avatar} src="https://cdn3.iconfinder.com/data/icons/avatars-round-flat/33/avat-01-512.png" alt="avatar" />
-                <h2 className={s.sidebar__top__name}>Bacho Usubovi</h2>
-                <p className={s.sidebar__top__email}>b@gmail.com</p>
+                <h2 className={s.sidebar__top__name}>{currentUser.name}</h2>
             </div>
 
             <div className={s.sidebar__stats}>
