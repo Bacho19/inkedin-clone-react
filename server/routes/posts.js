@@ -33,4 +33,15 @@ route.get('/', async (req, res) => {
   }
 })
 
+route.delete('/:id', async (req, res) => {
+    try {
+        const {id} = req.params
+
+        await Post.findOneAndRemove({_id: id})
+        res.json('Post was removed')
+    } catch (e) {
+        res.status(500).json('Something went wrong, please try again')
+    }
+})
+
 module.exports = route

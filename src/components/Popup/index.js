@@ -39,9 +39,11 @@ const Popup = ({title = 'Message', text, onClick = () => {}}) => {
                     </button>
                 </div>
                 <div className={s.text}>
-                    <p>
-                        {text}
-                    </p>
+                    <div>
+                        {typeof text === 'string' ? text: text.map((item, index) => {
+                            return <div style={{marginBottom: '4px'}} key={index + item.msg}>{item.msg}</div>
+                        })}
+                    </div>
                 </div>
                 <div className={s.bottom}>
                     <button onClick={closeHandler}>

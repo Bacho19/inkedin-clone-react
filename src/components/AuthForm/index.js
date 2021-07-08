@@ -30,11 +30,20 @@ const AuthForm = () => {
     const registerHandler = async (e) => {
         try {
             e.preventDefault()
-            const response = await registerQuery.request('/auth/register', 'POST', {name: name.value, password: password.value})
-            const responseMessage = response.message ? response.message: response
-            setModalMessage(responseMessage)
-            name.setValue('')
-            password.setValue('')
+
+            if (name.value.trim()) {
+                const response = await registerQuery.request('/auth/register', 'POST', {
+                    name: name.value,
+                    password: password.value
+                })
+                let responseMessage = response.message ? response.message : response
+                if (typeof response !== 'string' && typeof response.message !== 'string') {
+                    responseMessage = response.errors
+                }
+                setModalMessage(responseMessage)
+                name.setValue('')
+                password.setValue('')
+            }
         } catch (e) {
             console.log(e)
         }
@@ -53,15 +62,18 @@ const AuthForm = () => {
     const loginHandler = async (e) => {
         try {
             e.preventDefault()
-            const response = await loginQuery.request('/auth/login', 'POST', {
-                name: name.value,
-                password: password.value
-            })
-            const responseMessage = response.token ? null: response
-            setModalMessage(responseMessage)
-            login(response.token, response.userId)
-            name.setValue('')
-            password.setValue('')
+            if (name.value.trim()) {
+
+                const response = await loginQuery.request('/auth/login', 'POST', {
+                    name: name.value,
+                    password: password.value
+                })
+                const responseMessage = response.token ? null : response
+                setModalMessage(responseMessage)
+                login(response.token, response.userId)
+                name.setValue('')
+                password.setValue('')
+            }
         } catch (e) {
             console.log(e)
         }
@@ -72,15 +84,15 @@ const AuthForm = () => {
     // }, [])
 
     if (registerQuery.loading || loginQuery.loading) {
-        return <Loader />
+        return <Loader/>
     }
 
     if (registerQuery.error) {
-        return <Popup text={'An error has occurred: ' + registerQuery.error.message} />
+        return <Popup text={'An error has occurred: ' + registerQuery.error.message}/>
     }
 
     if (loginQuery.error) {
-        return <Popup text={'An error has occurred: ' + loginQuery.error.message} />
+        return <Popup text={'An error has occurred: ' + loginQuery.error.message}/>
     }
 
     return (

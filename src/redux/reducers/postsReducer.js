@@ -1,4 +1,4 @@
-import {ADD_POST, FETCH_POSTS} from "../types";
+import {ADD_POST, FETCH_POSTS, REMOVE_POST} from "../types";
 
 const initialState = {
     news: [
@@ -19,6 +19,8 @@ export const postsReducer = (state = initialState, action) => {
             return {...state, sharedPosts: action.payload}
         case ADD_POST:
             return {...state, sharedPosts: [...state.sharedPosts, action.payload]}
+        case REMOVE_POST:
+            return {...state, sharedPosts: state.sharedPosts.filter((item) => item._id !== action.payload)}
         default:
             return state
     }

@@ -2,32 +2,41 @@ const express = require('express')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const User = require('../models/User')
+const {body, validationResult} = require('express-validator')
 
 const route = express()
 
-route.post('/register', async (req, res) => {
-    try {
-        const {name, password} = req.body
+route.post('/register',
+    body('name').isLength({min: 5}).withMessage('Name must be at least 5 chars long'),
+    body('password').isLength({min: 6}).withMessage('Password must be at least 6 chars long'),
+    async (req, res) => {
+        try {
+            const errors = validationResult(req)
+            if (!errors.isEmpty()) {
+                return res.status(400).json({ errors: errors.array() })
+            }
 
-        const candidateUser = await User.findOne({name: name})
+            const {name, password} = req.body
 
-        if (candidateUser) {
-            return res.status(400).json('User with this name already exists')
+            const candidateUser = await User.findOne({name: name})
+
+            if (candidateUser) {
+                return res.status(400).json('User with this name already exists')
+            }
+
+            const hashedPassword = await bcrypt.hash(password, 4)
+
+            const user = new User({
+                name,
+                password: hashedPassword
+            })
+
+            await user.save()
+            res.status(201).json({message: 'User created', user})
+        } catch (e) {
+            res.status(500).json({message: 'Something went wrong, please try again'})
         }
-
-        const hashedPassword = await bcrypt.hash(password, 4)
-
-        const user = new User({
-            name,
-            password: hashedPassword
-        })
-
-        await user.save()
-        res.status(201).json({message: 'User created', user})
-    } catch (e) {
-        res.status(500).json({message: 'Something went wrong, please try again'})
-    }
-})
+    })
 
 route.post('/login', async (req, res) => {
     try {

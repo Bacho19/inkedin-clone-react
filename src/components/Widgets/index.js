@@ -12,7 +12,7 @@ function Widgets({ syncNews }) {
                     <h2 className={s.widgets__title__text}>LinkedIn News</h2>
                     <AiFillInfoCircle className={s.widgets__title__icon} />
                 </div>
-                { syncNews.map(item => (
+                { syncNews?.map(item => (
                     <div className={s.widgets__news__item} key={item.id}>
                         <BsFillCircleFill className={s.widgets__news__item__fillIcon} />
                         <div>

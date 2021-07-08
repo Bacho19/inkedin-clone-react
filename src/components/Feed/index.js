@@ -5,12 +5,13 @@ import InputOption from './InputOption'
 import Post from './Post'
 
 import {useSelector, useDispatch} from 'react-redux'
-import {addPost, fetchPosts} from "../../redux/actions/posts";
+import {addPost, fetchPosts, removePost} from "../../redux/actions/posts";
 
-import s from './style/Feed.module.css'
 import {useHttp} from "../../hooks/useHttp";
 import Loader from "../Loader";
 import Popup from "../Popup";
+
+import s from './style/Feed.module.css'
 
 function Feed({currentUser}) {
 
@@ -59,6 +60,19 @@ function Feed({currentUser}) {
         }
     }
 
+    const removePostHttp = useHttp()
+
+    const deletePostHandler = async (id) => {
+        if (window.confirm('Are you sure to remove this post?')) {
+            try {
+                await removePostHttp.request(`/posts/${id}`, 'DELETE')
+                dispatch(removePost(id))
+            } catch (e) {
+                console.log(e)
+            }
+        }
+    }
+
     useEffect(() => {
         fetchPostsFromServer()
 
@@ -68,7 +82,7 @@ function Feed({currentUser}) {
         // eslint-disable-next-line
     }, [])
 
-    if (fetchPostHttp.loading || addPostHttp.loading) {
+    if (fetchPostHttp.loading || removePostHttp.loading) {
         return <Loader/>
     }
 
@@ -98,9 +112,11 @@ function Feed({currentUser}) {
             {posts?.length ? posts.map(({_id, owner, text}) => (
                 <Post
                     key={_id}
+                    id={_id}
                     name={owner}
                     description={''}
                     message={text}
+                    deletePostHandler={deletePostHandler}
                     photoUrl={''}
                 />
             )) : <p className={s.noPosts}>No posts..</p>}
